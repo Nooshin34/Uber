@@ -1,0 +1,341 @@
+ # سیستم مدیریت و دیسپچ تاکسی (مشابه اسنپ) — نسخه Windows Forms
+
+## توضیحات کلی سیستم
+
+این سیستم برای مدیریت یک سرویس تاکسی‌رانی/باربری آنلاین طراحی شده که در قالب یک اپلیکیشن دسکتاپ (Windows Forms) برای استفاده اپراتورهای مرکز تماس، مدیران، و رانندگان (از طریق پنل مانیتورینگ) به کار می‌رود. برخلاف اپلیکیشن‌های موبایل مسافر/راننده، این نرم‌افزار نقش **پنل مدیریتی و دیسپچ مرکزی** را ایفا می‌کند.
+
+**مدیریت درخواست سفر:** ثبت درخواست سفر توسط اپراتور یا مسافر (از طریق سرویس API خارجی)، تخصیص خودکار یا دستی راننده بر اساس نزدیک‌ترین موقعیت مکانی و وضعیت آنلاین بودن، و پیگیری وضعیت سفر از لحظه ثبت تا پایان.
+
+**مدیریت راننده و خودرو:** ثبت‌نام راننده، تایید مدارک (کارت ماشین، بیمه، گواهینامه)، تعریف خودرو و نوع سرویس (اکونومی، لوکس، ون، باربری)، و کنترل وضعیت آنلاین/آفلاین راننده.
+
+**مدیریت مسافر:** ثبت مسافر، مدیریت کیف پول، آدرس‌های ذخیره‌شده، سابقه سفرها، و امتیازدهی به راننده.
+
+**قیمت‌گذاری و کرایه:** محاسبه کرایه بر اساس فاصله، زمان، منطقه، ساعت اوج ترافیک (ضریب سورج/Surge)، و اعمال کد تخفیف.
+
+**پرداخت و کیف پول:** پرداخت نقدی یا آنلاین، شارژ کیف پول مسافر، تسویه‌حساب هفتگی/ماهانه با رانندگان، و کسر کمیسیون شرکت.
+
+**مناطق و نرخ‌بندی جغرافیایی:** تعریف شهر، منطقه، و محدوده پوششی هر منطقه برای محاسبه کرایه پایه متفاوت.
+
+**پشتیبانی و شکایات:** ثبت تیکت پشتیبانی، پیگیری شکایات مسافر/راننده، و مدیریت جریمه یا مسدودسازی حساب.
+
+**گزارشات و تحلیل:** گزارش تعداد سفرها، درآمد، عملکرد راننده‌ها، مناطق پرتقاضا، و نرخ لغو سفر.
+
+**مدیریت کاربران سیستم (اپراتورها):** دسترسی بر اساس نقش (مدیر، اپراتور دیسپچ، حسابدار، پشتیبانی) با لاگ کامل فعالیت‌ها.
+
+---
+
+***موارد اضافه برای فاز بعدی:***
+- ***اضافه کردن سیستم اشتراک ویژه برای مسافران پرتردد (پلن‌های نقره‌ای/طلایی) با تخفیف ثابت***
+- ***اضافه کردن قابلیت سفرهای اشتراکی (Carpool) با تقسیم کرایه بین چند مسافر***
+
+---
+
+output -> Windows Form App (پنل اپراتور/مدیر)
+
+---
+
+## کلاس‌های دامنه (Domain Classes)
+
+### User (اپراتور سیستم)
+- UserId → int
+- UserName → string
+- PasswordHash → string
+- FirstName → string
+- LastName → string
+- PhoneNumber → string
+- RoleId → int (FK → Role)
+- IsActive → bool
+- CreatedAt → dateTime
+- LastLoginAt → dateTime
+
++ read
++ create
++ update
++ delete
++ login
++ logout
++ changePassword
+
+### Role
+- RoleID → int
+- RoleName → string
+- Description → string
++ read
++ create
++ update
++ delete
++ assignPermission
++ revokePermission
+
+### City
+- CityID → int
+- CityName → string
+- IsActive → bool
++ read
++ create
++ update
++ delete
+
+### Zone (منطقه پوششی درون شهر)
+- ZoneID → int
+- ZoneName → string
+- CityID → int (FK → City)
+- BaseFareMultiplier → decimal
+- IsActive → bool
++ read
++ create
++ update
++ delete
++ getSurgeMultiplier
+
+### VehicleType (نوع سرویس)
+- VehicleTypeID → int
+- TypeName → enum (Economy, Comfort, Van, Cargo)
+- BaseFare → decimal
+- PricePerKm → decimal
+- PricePerMinute → decimal
+- MinFare → decimal
+- Capacity → int
++ read
++ create
++ update
++ delete
+
+### Driver
+- DriverID → int
+- FirstName → string
+- LastName → string
+- PhoneNumber → string
+- NationalCode → string
+- LicenseNumber → string
+- LicenseExpiryDate → dateTime
+- Status → enum (PendingApproval, Active, Suspended, Blocked)
+- IsOnline → bool
+- CurrentLatitude → decimal
+- CurrentLongitude → decimal
+- Rating → decimal
+- WalletBalance → decimal
+- CreatedAt → dateTime
++ read
++ create
++ update
++ delete
++ approve
++ suspend
++ goOnline
++ goOffline
++ updateLocation
++ getTripHistory
++ getBalance
+
+### Vehicle
+- VehicleID → int
+- DriverID → int (FK → Driver)
+- VehicleTypeID → int (FK → VehicleType)
+- PlateNumber → string
+- Brand → string
+- Model → string
+- Color → string
+- ProductionYear → int
+- InsuranceExpiryDate → dateTime
+- IsActive → bool
++ read
++ create
++ update
++ delete
++ verifyDocuments
+
+### Passenger (مسافر)
+- PassengerID → int
+- FirstName → string
+- LastName → string
+- PhoneNumber → string
+- WalletBalance → decimal
+- MembershipLevel → enum (Standard, Silver, Gold)
+- IsActive → bool
+- IsBlocked → bool
+- CreatedAt → dateTime
++ read
++ create
++ update
++ delete
++ getBalance
++ getTripHistory
++ block
++ unblock
+
+### Address (آدرس ذخیره‌شده مسافر)
+- AddressID → int
+- PassengerID → int (FK → Passenger)
+- Title → string
+- Latitude → decimal
+- Longitude → decimal
+- FullAddress → string
++ read
++ create
++ update
++ delete
+
+### Trip (سفر)
+- TripID → int
+- PassengerID → int (FK → Passenger)
+- DriverID → int? (FK → Driver)
+- VehicleTypeID → int (FK → VehicleType)
+- ZoneID → int (FK → Zone)
+- OriginLatitude → decimal
+- OriginLongitude → decimal
+- OriginAddress → string
+- DestinationLatitude → decimal
+- DestinationLongitude → decimal
+- DestinationAddress → string
+- RequestTime → dateTime
+- AcceptTime → dateTime?
+- PickupTime → dateTime?
+- DropoffTime → dateTime?
+- DistanceKm → decimal
+- DurationMinutes → int
+- BaseFare → decimal
+- SurgeMultiplier → decimal
+- DiscountAmount → decimal
+- FinalFare → decimal
+- Status → enum (Requested, DriverAssigned, DriverArrived, InProgress, Completed, CancelledByPassenger, CancelledByDriver, NoDriverFound)
+- PaymentMethod → enum (Cash, Wallet, Card)
+- PaymentStatus → enum (Pending, Paid, Failed)
++ read
++ create
++ update
++ delete
++ assignDriver
++ cancel
++ startTrip
++ completeTrip
++ calculateFare
++ applyDiscount
+
+### DriverOffer (پیشنهاد سفر به راننده قبل از پذیرش)
+- OfferID → int
+- TripID → int (FK → Trip)
+- DriverID → int (FK → Driver)
+- OfferTime → dateTime
+- ResponseTime → dateTime?
+- Status → enum (Pending, Accepted, Rejected, Expired)
++ read
++ create
++ update
++ accept
++ reject
+
+### Rating (امتیازدهی)
+- RatingID → int
+- TripID → int (FK → Trip)
+- RatedByPassenger → bool
+- Score → int (1-5)
+- Comment → string
+- CreatedAt → dateTime
++ read
++ create
++ update
++ delete
+
+### PromoCode (کد تخفیف)
+- PromoCodeID → int
+- Code → string
+- DiscountType → enum (Percentage, FixedAmount)
+- DiscountValue → decimal
+- MaxDiscountAmount → decimal
+- MinTripAmount → decimal
+- ValidFrom → dateTime
+- ValidTo → dateTime
+- UsageLimitPerUser → int
+- IsActive → bool
++ read
++ create
++ update
++ delete
++ validate
++ applyToTrip
+
+### WalletTransaction (تراکنش کیف پول)
+- TransactionID → int
+- OwnerType → enum (Passenger, Driver)
+- OwnerID → int
+- TripID → int? (FK → Trip)
+- Amount → decimal
+- TransactionType → enum (Charge, Deduction, TripPayment, TripEarning, CommissionDeduction, Withdrawal, Refund)
+- BalanceAfter → decimal
+- CreatedAt → dateTime
+- Note → string
++ read
++ create
++ delete
+
+### Settlement (تسویه‌حساب راننده)
+- SettlementID → int
+- DriverID → int (FK → Driver)
+- PeriodStart → dateTime
+- PeriodEnd → dateTime
+- TotalTripsAmount → decimal
+- TotalCommission → decimal
+- NetPayable → decimal
+- Status → enum (Pending, Paid)
+- PaidAt → dateTime?
++ read
++ create
++ update
++ markAsPaid
++ generateReport
+
+### SupportTicket (تیکت پشتیبانی)
+- TicketID → int
+- CreatedByType → enum (Passenger, Driver)
+- CreatedByID → int
+- TripID → int? (FK → Trip)
+- Subject → string
+- Description → string
+- Priority → enum (Low, Medium, High, Urgent)
+- Status → enum (Open, InProgress, Resolved, Closed)
+- AssignedUserID → int? (FK → User)
+- CreatedAt → dateTime
+- ResolvedAt → dateTime?
++ read
++ create
++ update
++ delete
++ assign
++ resolve
++ close
+
+### Penalty (جریمه)
+- PenaltyID → int
+- DriverID → int? (FK → Driver)
+- PassengerID → int? (FK → Passenger)
+- Reason → string
+- Amount → decimal
+- Status → enum (Applied, Waived, Deducted)
+- CreatedAt → dateTime
++ read
++ create
++ update
++ delete
++ waive
+
+### ActivityLog
+- LogID → int
+- UserID → int (FK → User)
+- Action → string
+- TableName → string
+- RecordID → int
+- OldValue → string
+- NewValue → string
+- CreatedAt → dateTime
++ read
++ create
+
+---
+
+## روابط کلیدی (Key Relationships)
+- یک **Driver** یک یا چند **Vehicle** دارد؛ فقط یک خودرو در هر زمان فعال است.
+- هر **Trip** دقیقاً یک **Passenger**، حداکثر یک **Driver**، و یک **VehicleType** دارد.
+- **DriverOffer** واسط بین Trip و Driver قبل از قطعی‌شدن تخصیص است (برای پشتیبانی از الگوریتم پیشنهاد به چند راننده هم‌زمان).
+- **WalletTransaction** برای هر دو طرف Passenger و Driver مشترک است تا گزارش مالی یکپارچه باشد.
+- **Settlement** بر اساس مجموع WalletTransaction های نوع TripEarning در یک بازه زمانی محاسبه می‌شود.

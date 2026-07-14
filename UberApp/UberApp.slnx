@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/Docs/">
+    <File Path="Domain specification.txt" />
+  </Folder>
+  <Folder Name="/SRC/" />
+  <Folder Name="/SRC/BusinessLayer/">
+    <Project Path="../Uber.Business/Uber.Business.csproj" Id="5749b44e-3a54-4481-81e4-b1fb7c96d290" />
+  </Folder>
+  <Folder Name="/SRC/DataAccessLayer/">
+    <Project Path="../Uber.DataAccess/Uber.DataAccess.csproj" Id="5fdee6c7-4cdc-4f24-b4bc-45325bed2844" />
+  </Folder>
+  <Folder Name="/SRC/DomainLayer/">
+    <Project Path="../Uber.Domain/Uber.Domain.csproj" Id="abec5f63-8580-4a29-9319-a24058508c98" />
+  </Folder>
+  <Folder Name="/SRC/PresentationLayer/">
+    <Project Path="UberApp.csproj" />
+  </Folder>
+</Solution>
