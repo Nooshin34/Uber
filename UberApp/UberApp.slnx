@@ -2,6 +2,10 @@
   <Folder Name="/Docs/">
     <File Path="Domain specification.txt" />
   </Folder>
+  <Folder Name="/Scripts/">
+    <File Path="../Uber.DataAccess/Scripts/CreateDatabase.sql" />
+    <File Path="../Uber.DataAccess/Scripts/InitializeDatabase.sql" />
+  </Folder>
   <Folder Name="/SRC/" />
   <Folder Name="/SRC/BusinessLayer/">
     <Project Path="../Uber.Business/Uber.Business.csproj" Id="5749b44e-3a54-4481-81e4-b1fb7c96d290" />

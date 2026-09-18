@@ -29,14 +29,9 @@
         private void InitializeComponent()
         {
             menuStrip1 = new MenuStrip();
-            uberAppToolStripMenuItem = new ToolStripMenuItem();
-            taxiToolStripMenuItem = new ToolStripMenuItem();
-            mToolStripMenuItem = new ToolStripMenuItem();
-            foodToolStripMenuItem = new ToolStripMenuItem();
-            hotelToolStripMenuItem = new ToolStripMenuItem();
-            driverRegistrationToolStripMenuItem = new ToolStripMenuItem();
+            registrationToolStripMenuItem = new ToolStripMenuItem();
             userRegistrationToolStripMenuItem = new ToolStripMenuItem();
-            driverRegistrationToolStripMenuItem1 = new ToolStripMenuItem();
+            carRegistrationToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -44,54 +39,20 @@
             // 
             menuStrip1.BackColor = Color.Black;
             menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { uberAppToolStripMenuItem, driverRegistrationToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { registrationToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 33);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
-            // uberAppToolStripMenuItem
+            // registrationToolStripMenuItem
             // 
-            uberAppToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { taxiToolStripMenuItem, mToolStripMenuItem, foodToolStripMenuItem, hotelToolStripMenuItem });
-            uberAppToolStripMenuItem.ForeColor = SystemColors.Control;
-            uberAppToolStripMenuItem.Name = "uberAppToolStripMenuItem";
-            uberAppToolStripMenuItem.Size = new Size(102, 29);
-            uberAppToolStripMenuItem.Text = "Uber app";
-            // 
-            // taxiToolStripMenuItem
-            // 
-            taxiToolStripMenuItem.Name = "taxiToolStripMenuItem";
-            taxiToolStripMenuItem.Size = new Size(270, 34);
-            taxiToolStripMenuItem.Text = "Taxi";
-            // 
-            // mToolStripMenuItem
-            // 
-            mToolStripMenuItem.Name = "mToolStripMenuItem";
-            mToolStripMenuItem.Size = new Size(270, 34);
-            mToolStripMenuItem.Text = "Motor";
-            mToolStripMenuItem.Click += mToolStripMenuItem_Click;
-            // 
-            // foodToolStripMenuItem
-            // 
-            foodToolStripMenuItem.Name = "foodToolStripMenuItem";
-            foodToolStripMenuItem.Size = new Size(270, 34);
-            foodToolStripMenuItem.Text = "Food";
-            // 
-            // hotelToolStripMenuItem
-            // 
-            hotelToolStripMenuItem.Name = "hotelToolStripMenuItem";
-            hotelToolStripMenuItem.Size = new Size(270, 34);
-            hotelToolStripMenuItem.Text = "Hotel";
-            // 
-            // driverRegistrationToolStripMenuItem
-            // 
-            driverRegistrationToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { userRegistrationToolStripMenuItem, driverRegistrationToolStripMenuItem1 });
-            driverRegistrationToolStripMenuItem.ForeColor = SystemColors.Control;
-            driverRegistrationToolStripMenuItem.Name = "driverRegistrationToolStripMenuItem";
-            driverRegistrationToolStripMenuItem.Size = new Size(122, 29);
-            driverRegistrationToolStripMenuItem.Text = "Registration";
-            driverRegistrationToolStripMenuItem.Click += driverRegistrationToolStripMenuItem_Click;
+            registrationToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { userRegistrationToolStripMenuItem, carRegistrationToolStripMenuItem });
+            registrationToolStripMenuItem.ForeColor = SystemColors.Control;
+            registrationToolStripMenuItem.Name = "registrationToolStripMenuItem";
+            registrationToolStripMenuItem.Size = new Size(122, 29);
+            registrationToolStripMenuItem.Text = "Registration";
             // 
             // userRegistrationToolStripMenuItem
             // 
@@ -100,11 +61,12 @@
             userRegistrationToolStripMenuItem.Text = "User registration";
             userRegistrationToolStripMenuItem.Click += userRegistrationToolStripMenuItem_Click;
             // 
-            // driverRegistrationToolStripMenuItem1
+            // carRegistrationToolStripMenuItem
             // 
-            driverRegistrationToolStripMenuItem1.Name = "driverRegistrationToolStripMenuItem1";
-            driverRegistrationToolStripMenuItem1.Size = new Size(270, 34);
-            driverRegistrationToolStripMenuItem1.Text = "Driver registration";
+            carRegistrationToolStripMenuItem.Name = "carRegistrationToolStripMenuItem";
+            carRegistrationToolStripMenuItem.Size = new Size(270, 34);
+            carRegistrationToolStripMenuItem.Text = "Car registration";
+            carRegistrationToolStripMenuItem.Click += carRegistrationToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -125,13 +87,8 @@
         #endregion
 
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem uberAppToolStripMenuItem;
-        private ToolStripMenuItem taxiToolStripMenuItem;
-        private ToolStripMenuItem mToolStripMenuItem;
-        private ToolStripMenuItem foodToolStripMenuItem;
-        private ToolStripMenuItem hotelToolStripMenuItem;
-        private ToolStripMenuItem driverRegistrationToolStripMenuItem;
+        private ToolStripMenuItem registrationToolStripMenuItem;
         private ToolStripMenuItem userRegistrationToolStripMenuItem;
-        private ToolStripMenuItem driverRegistrationToolStripMenuItem1;
+        private ToolStripMenuItem carRegistrationToolStripMenuItem;
     }
 }

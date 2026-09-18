@@ -30,10 +30,6 @@
         {
             editButton = new Button();
             isActiveRadioButton = new RadioButton();
-            wareHouseLabel = new Label();
-            wareHouseComboBox = new ComboBox();
-            roleLabel = new Label();
-            roleComboBox = new ComboBox();
             passTextBox = new TextBox();
             passLabel = new Label();
             userDataGridView = new DataGridView();
@@ -47,6 +43,7 @@
             firstNameTextBox = new TextBox();
             firstNameLabel = new Label();
             requestTaxiButton = new Button();
+            manageCarsButton = new Button();
             ((System.ComponentModel.ISupportInitialize)userDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -66,49 +63,13 @@
             // 
             isActiveRadioButton.AutoSize = true;
             isActiveRadioButton.ForeColor = SystemColors.Control;
-            isActiveRadioButton.Location = new Point(51, 477);
+            isActiveRadioButton.Location = new Point(51, 360);
             isActiveRadioButton.Name = "isActiveRadioButton";
             isActiveRadioButton.Size = new Size(85, 29);
             isActiveRadioButton.TabIndex = 35;
             isActiveRadioButton.TabStop = true;
             isActiveRadioButton.Text = "Active";
             isActiveRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // wareHouseLabel
-            // 
-            wareHouseLabel.AutoSize = true;
-            wareHouseLabel.ForeColor = SystemColors.Control;
-            wareHouseLabel.Location = new Point(54, 425);
-            wareHouseLabel.Name = "wareHouseLabel";
-            wareHouseLabel.Size = new Size(46, 25);
-            wareHouseLabel.TabIndex = 34;
-            wareHouseLabel.Text = "Role";
-            // 
-            // wareHouseComboBox
-            // 
-            wareHouseComboBox.FormattingEnabled = true;
-            wareHouseComboBox.Location = new Point(201, 417);
-            wareHouseComboBox.Name = "wareHouseComboBox";
-            wareHouseComboBox.Size = new Size(286, 33);
-            wareHouseComboBox.TabIndex = 33;
-            // 
-            // roleLabel
-            // 
-            roleLabel.AutoSize = true;
-            roleLabel.ForeColor = SystemColors.Control;
-            roleLabel.Location = new Point(54, 360);
-            roleLabel.Name = "roleLabel";
-            roleLabel.Size = new Size(46, 25);
-            roleLabel.TabIndex = 32;
-            roleLabel.Text = "Role";
-            // 
-            // roleComboBox
-            // 
-            roleComboBox.FormattingEnabled = true;
-            roleComboBox.Location = new Point(201, 352);
-            roleComboBox.Name = "roleComboBox";
-            roleComboBox.Size = new Size(286, 33);
-            roleComboBox.TabIndex = 31;
             // 
             // passTextBox
             // 
@@ -229,19 +190,28 @@
             requestTaxiButton.UseVisualStyleBackColor = false;
             requestTaxiButton.Click += requestTaxiButton_Click;
             // 
+            // manageCarsButton
+            // 
+            manageCarsButton.BackColor = Color.SeaGreen;
+            manageCarsButton.ForeColor = SystemColors.Control;
+            manageCarsButton.Location = new Point(674, 522);
+            manageCarsButton.Name = "manageCarsButton";
+            manageCarsButton.Size = new Size(171, 63);
+            manageCarsButton.TabIndex = 39;
+            manageCarsButton.Text = "Manage Cars";
+            manageCarsButton.UseVisualStyleBackColor = false;
+            manageCarsButton.Click += manageCarsButton_Click;
+            // 
             // UserRegistrationForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDarkDark;
             ClientSize = new Size(1170, 628);
+            Controls.Add(manageCarsButton);
             Controls.Add(requestTaxiButton);
             Controls.Add(editButton);
             Controls.Add(isActiveRadioButton);
-            Controls.Add(wareHouseLabel);
-            Controls.Add(wareHouseComboBox);
-            Controls.Add(roleLabel);
-            Controls.Add(roleComboBox);
             Controls.Add(passTextBox);
             Controls.Add(passLabel);
             Controls.Add(userDataGridView);
@@ -265,10 +235,6 @@
 
         private Button editButton;
         private RadioButton isActiveRadioButton;
-        private Label wareHouseLabel;
-        private ComboBox wareHouseComboBox;
-        private Label roleLabel;
-        private ComboBox roleComboBox;
         private TextBox passTextBox;
         private Label passLabel;
         private DataGridView userDataGridView;
@@ -282,5 +248,6 @@
         private TextBox firstNameTextBox;
         private Label firstNameLabel;
         private Button requestTaxiButton;
+        private Button manageCarsButton;
     }
 }

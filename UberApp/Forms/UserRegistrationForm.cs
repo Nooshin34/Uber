@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Uber.Business.Businesses;
 using UberApp.Domain;
 
 namespace UberApp.Forms
@@ -13,9 +14,12 @@ namespace UberApp.Forms
     {
         List<User> users = new List<User>();
         User targetUser = null;
+        UserBusiness userBusiness = new();
         public UserRegistrationForm()
         {
             InitializeComponent();
+            users = userBusiness.GetAll();
+            refreshForm();
         }
 
         private void addUserButton_Click(object sender, EventArgs e)
@@ -23,16 +27,15 @@ namespace UberApp.Forms
             try
             {
                 User user = User.Create(
-                    new Random().Next(1, 1000),
                     userNameTextBox.Text,
                     passTextBox.Text,
                     firstNameTextBox.Text,
                     lastNameTextBox.Text,
                     phoneTextBox.Text,
-                    1,//Convert.ToInt32(roleComboBox.SelectedValue),
                     isActiveRadioButton.Checked);
 
-                users.Add(user);
+                userBusiness.Add(user);
+                users = userBusiness.GetAll();
                 refreshForm();
                 resetForm();
             }
@@ -102,6 +105,18 @@ namespace UberApp.Forms
             }    
             RequestTaxiForm requestTaxiForm = new RequestTaxiForm(targetUser.Id, targetUser.FullName);
             requestTaxiForm.ShowDialog();
+        }
+
+        private void manageCarsButton_Click(object sender, EventArgs e)
+        {
+            if (targetUser is null)
+            {
+                MessageBox.Show("Please select a user...");
+                return;
+            }
+
+            CarRegistrationForm carRegistrationForm = new CarRegistrationForm(targetUser.Id, targetUser.FullName);
+            carRegistrationForm.ShowDialog();
         }
     }
 }

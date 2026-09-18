@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
+using System.Numerics;
 using System.Text;
 using Uber.Domain.Contracts;
 
@@ -11,31 +12,34 @@ namespace UberApp.Domain;
 
 public class User :  IFullEntity<long>
 {
-    [Key]
+    public User() { }
+
+    public User(long id, string firstName, string lastName, string phone)
+    {
+        Id = id;
+        FirstName = firstName;
+        LastName = lastName;
+        PhoneNumber = phone;
+        UserName = string.Empty; 
+        PasswordHash = string.Empty;
+        IsActive = true;
+        CreatedAt = DateTime.UtcNow;
+        IsDeleted = false;
+        DeletedAt = new DateTime(1900, 1, 1); 
+        LastLoginAt = null;
+    }
+
     public long Id { get; set; }
 
-    [Required]
-    [MaxLength(100)]
     public string UserName { get; set; } = string.Empty;
 
-    [Required]
-    [JsonProperty]
-    public string PasswordHash { get; private set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty;
 
-    [Required]
-    [MaxLength(100)]
     public string FirstName { get; set; } = string.Empty;
 
-    [Required]
-    [MaxLength(100)]
     public string LastName { get; set; } = string.Empty;
 
-    [Phone]
-    [MaxLength(20)]
     public string PhoneNumber { get; set; } = string.Empty;
-
-    [ForeignKey(nameof(Role))]
-    public int RoleId { get; set; }
 
     public bool IsActive { get; set; } = true;
 
@@ -46,11 +50,13 @@ public class User :  IFullEntity<long>
     public DateTime DeletedAt { get; set; }
     public string FullName { get { return FirstName + " " + LastName; }}
 
+    [System.ComponentModel.Browsable(false)]
+    public ICollection<Car> Cars { get; set; } = new List<Car>();
 
 
 
-    // Navigation Property
-    public virtual Role? Role { get; set; }
+
+    
     
 
     public void UpdateFirstName(string firstName)
@@ -71,16 +77,13 @@ public class User :  IFullEntity<long>
 
 
     public static User Create(
-        int id,
-    string userName,
-    string passwordHash,
-    string firstName,
-    string lastName,
-    string phoneNumber,
-    int roleId,
-    bool isActive)
+        string userName,
+        string passwordHash,
+        string firstName,
+        string lastName,
+        string phoneNumber,
+        bool isActive)
     {
-
         if (string.IsNullOrEmpty(firstName) || firstName.Length <= 2)
             throw new Exception("نام را درست وارد نمایید");
 
@@ -90,19 +93,18 @@ public class User :  IFullEntity<long>
         if (string.IsNullOrEmpty(phoneNumber) || phoneNumber.Length != 11)
             throw new Exception("شماره تلفن را درست وارد نمایید");
 
-
         return new User
         {
-            Id = id,
             UserName = userName,
             PasswordHash = passwordHash,
             FirstName = firstName,
             LastName = lastName,
             PhoneNumber = phoneNumber,
-            RoleId = roleId,
             IsActive = isActive,
             CreatedAt = DateTime.UtcNow,
-            LastLoginAt = null
+            LastLoginAt = null,
+            IsDeleted = false,
+            DeletedAt = new DateTime(1900, 1, 1)
         };
     }
 

@@ -6,14 +6,8 @@
     "firstName": "nooshin",
     "lastName": "nkz",
     "phoneNumber": "+1234567890",
-    "roleId": 1,
     "isActive": true,
     "createdAt": "2026-07-08T10:30:00Z",
-    "lastLoginAt": "2026-07-08T14:15:30Z",
-    "role": {
-      "roleId": 1,
-      "roleName": "Administrator",
-      "description": "System administrator with full access"
-    }
+    "lastLoginAt": "2026-07-08T14:15:30Z"
   }
 ]

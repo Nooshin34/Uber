@@ -1,0 +1,61 @@
+## Build
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Dd]ebug/
+[Rr]elease/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.ipdb
+
+## Visual Studio / Cursor
+.vs/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+*.rsuser
+*.VC.db
+*.VC.VC.opendb
+*.aps
+
+## NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## Test / coverage
+[Tt]est[Rr]esult*/
+*.coverage
+*.coveragexml
+TestResult.xml
+
+## Publish / logs
+*.log
+publish/
+PublishScripts/
+AppPackages/
+BundleArtifacts/
+
+## OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+## Local secrets
+*.pfx
+*.publishsettings
+appsettings.*.local.json
+secrets.json
+.env
+.env.*

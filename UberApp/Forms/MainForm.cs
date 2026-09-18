@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-
-namespace UberApp.Forms
+﻿namespace UberApp.Forms
 {
     public partial class MainForm : Form
     {
@@ -15,21 +7,16 @@ namespace UberApp.Forms
             InitializeComponent();
         }
 
-        private void mToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void driverRegistrationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void userRegistrationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
             userRegistrationForm.ShowDialog();
+        }
 
+        private void carRegistrationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CarRegistrationForm carRegistrationForm = new CarRegistrationForm();
+            carRegistrationForm.ShowDialog();
         }
     }
 }
